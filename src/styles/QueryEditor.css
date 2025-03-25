@@ -1,0 +1,75 @@
+.query-editor-container {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #282a36;
+    color: white;
+    position: relative;
+  }
+  
+  .line-numbers {
+    padding: 10px;
+    background: #1e1e1e;
+    text-align: right;
+    color: #888;
+    font-size: 14px;
+    user-select: none;
+    min-width: 40px;
+  }
+  
+  .query-editor-wrapper {
+    position: relative;
+    flex: 1;
+  }
+  
+  .query-highlighter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-family: "Courier New", Courier, monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: white;
+    pointer-events: none;
+  }
+  
+  .query-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-family: "Courier New", Courier, monospace;
+    border: none;
+    background: transparent;
+    color: transparent;
+    caret-color: white;
+    resize: vertical;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+    outline: none;
+  }
+  
+
+  .keyword {
+    color: #ff79c6;
+    font-weight: bold;
+  }
+  
+  .string {
+    color: #f1fa8c;
+  }
+  
+  .number {
+    color: #bd93f9;
+  }
+  
+  .comment {
+    color: #6272a4;
+    font-style: italic;
+  }
+  
