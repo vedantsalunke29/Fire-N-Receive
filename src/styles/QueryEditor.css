@@ -1,75 +1,162 @@
 .query-editor-container {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    overflow: hidden;
-    font-family: "Courier New", Courier, monospace;
-    background-color: #282a36;
-    color: white;
-    position: relative;
-  }
-  
-  .line-numbers {
-    padding: 10px;
-    background: #1e1e1e;
-    text-align: right;
-    color: #888;
-    font-size: 14px;
-    user-select: none;
-    min-width: 40px;
-  }
-  
-  .query-editor-wrapper {
-    position: relative;
-    flex: 1;
-  }
-  
-  .query-highlighter {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    font-family: "Courier New", Courier, monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: white;
-    pointer-events: none;
-  }
-  
-  .query-textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    font-family: "Courier New", Courier, monospace;
-    border: none;
-    background: transparent;
-    color: transparent;
-    caret-color: white;
-    resize: vertical;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    position: relative;
-    outline: none;
-  }
-  
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--background-color);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
-  .keyword {
-    color: #ff79c6;
-    font-weight: bold;
-  }
-  
-  .string {
-    color: #f1fa8c;
-  }
-  
-  .number {
-    color: #bd93f9;
-  }
-  
-  .comment {
-    color: #6272a4;
-    font-style: italic;
-  }
-  
+.query-editor-container.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  border-radius: 0;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-background);
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+}
+
+.fullscreen-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+.fullscreen-toggle:hover {
+  background-color: var(--border-color);
+}
+
+.editor-content {
+  display: flex;
+  overflow: hidden;
+}
+
+.line-numbers {
+  padding: 0.5rem 0;
+  background-color: var(--secondary-background);
+  border-right: 1px solid var(--border-color);
+  user-select: none;
+  text-align: right;
+  color: var(--secondary-text);
+  font-size: 0.875rem;
+  overflow-y: hidden;
+  min-width: 2.5rem;
+}
+
+.line-numbers div {
+  padding: 0 0.5rem;
+  height: 1.5rem;
+}
+
+.query-editor-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.query-highlighter,
+.query-textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  margin: 0;
+  border: none;
+  font-family: "Fira Code", monospace, Consolas, "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.query-highlighter {
+  z-index: 1;
+  color: var(--text-color);
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.query-textarea {
+  z-index: 2;
+  color: var(--text-color);
+  background-color: transparent;
+  caret-color: var(--text-color);
+  resize: none;
+  outline: none;
+  opacity: 0.7;
+}
+
+.string {
+  color: #ce9178;
+}
+
+.comment {
+  color: #6a9955;
+}
+
+.query-textarea::-webkit-scrollbar,
+.query-highlighter::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.query-textarea::-webkit-scrollbar-thumb,
+.query-highlighter::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.query-textarea::-webkit-scrollbar-track,
+.query-highlighter::-webkit-scrollbar-track {
+  background-color: var(--secondary-background);
+}
+
+
+.dark-mode .query-editor-container {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .editor-header {
+  background-color: #252526;
+}
+
+.dark-mode .line-numbers {
+  background-color: #252526;
+  border-right-color: #3e3e42;
+}
+
+.dark-mode .string {
+  color: #ce9178;
+}
+
+.dark-mode .comment {
+  color: #6a9955;
+}
+
+
+:focus {
+  outline: none !important;
+}
+

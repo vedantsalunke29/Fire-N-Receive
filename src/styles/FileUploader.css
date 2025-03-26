@@ -1,0 +1,48 @@
+.file-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .upload-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary-background);
+    color: var(--text-color);
+    outline: none;
+  }
+  
+  .upload-button:hover:not(:disabled) {
+    background-color: var(--border-color);
+  }
+  
+  .upload-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .upload-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    font-size: 0.75rem;
+  }
+  
+  /* Remove focus styles */
+  .file-uploader *:focus {
+    outline: none;
+  }
+  
+  
