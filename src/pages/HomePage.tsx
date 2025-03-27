@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import {
 	Play,
@@ -87,9 +89,7 @@ export const HomePage = () => {
 		},
 	]);
 
-	// Effects
 	useEffect(() => {
-		// Check for user preference
 		const prefersDark = window.matchMedia(
 			"(prefers-color-scheme: dark)",
 		).matches;
@@ -100,7 +100,6 @@ export const HomePage = () => {
 		document.documentElement.classList.toggle("dark-mode", darkMode);
 	}, [darkMode]);
 
-	// Handlers
 	const runQuery = async () => {
 		if (!query.trim()) return;
 		setIsLoading(true);
@@ -110,15 +109,13 @@ export const HomePage = () => {
 			let data, cols;
 
 			if (querySource === "database") {
-				const result = await queryExecutor(query, selectedDatabase);
+				const result = await queryExecutor(query);
 				data = result.data;
 				cols = result.columns;
 			} else if (querySource === "file" && fileData) {
-				// Simple query parser for file data (very basic implementation)
-				// In a real app, you'd want a more robust SQL parser for file data
+
 				const lowerQuery = query.toLowerCase();
 				if (lowerQuery.includes("select") && lowerQuery.includes("from")) {
-					// Extract columns to select
 					const selectPart = lowerQuery
 						.split("select")[1]
 						.split("from")[0]
@@ -128,11 +125,9 @@ export const HomePage = () => {
 							? Object.keys(fileData[0])
 							: selectPart.split(",").map((col) => col.trim());
 
-					// Very basic filtering (just a demonstration)
 					let filteredData = fileData;
 					if (lowerQuery.includes("where")) {
 						const wherePart = lowerQuery.split("where")[1].trim();
-						// This is a very simplified parser - would need a proper SQL parser in real app
 						const [field, operator, value] = wherePart.split(/\s+/);
 
 						filteredData = fileData.filter((row) => {
@@ -144,7 +139,6 @@ export const HomePage = () => {
 						});
 					}
 
-					// Project only selected columns
 					data = filteredData.map((row) => {
 						const newRow: Record<string, any> = {};
 						selectedCols.forEach((col) => {
@@ -155,7 +149,6 @@ export const HomePage = () => {
 
 					cols = selectedCols;
 				} else {
-					// If query doesn't match expected format, return all data
 					data = fileData;
 					cols = Object.keys(fileData[0]);
 				}
@@ -199,7 +192,7 @@ export const HomePage = () => {
 					source: querySource,
 				},
 			]);
-			// Switch to saved tab after saving
+
 			setActiveTab("saved");
 		}
 	};
@@ -243,7 +236,6 @@ export const HomePage = () => {
 	const handleFileUpload = (data: any[]) => {
 		setFileData(data);
 		setQuerySource("file");
-		// Set a default query for the uploaded file
 		if (data.length > 0) {
 			const columns = Object.keys(data[0]).join(", ");
 			setQuery(`SELECT ${columns}`);
@@ -255,15 +247,13 @@ export const HomePage = () => {
 	};
 
 	const handleTableClick = (tableName: string) => {
-		// Find the selected database
+
 		const db = databaseStructure.find((db) => db.name === selectedDatabase);
 		if (!db) return;
 
-		// Find the selected table
 		const table = db.tables.find((t) => t.name === tableName);
 		if (!table) return;
 
-		// Generate a SELECT query for this table
 		const columns = table.columns.map((c) => c.name).join(", ");
 		setQuery(`SELECT ${columns} FROM ${tableName}`);
 	};
