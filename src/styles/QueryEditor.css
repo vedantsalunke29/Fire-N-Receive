@@ -3,7 +3,6 @@
   border-radius: var(--radius);
   background-color: var(--background-color);
   overflow: hidden;
-  transition: all 0.3s ease;
 }
 
 .query-editor-container.fullscreen {

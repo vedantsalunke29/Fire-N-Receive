@@ -96,7 +96,7 @@
     border-radius: var(--radius);
   }
   
-  /* Remove focus styles */
+
   .database-explorer *:focus {
     outline: none;
   }
