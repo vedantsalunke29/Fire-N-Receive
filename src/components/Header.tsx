@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
 				>
 					{sidebarOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
 				</button>
-				<h1>SQL Query Runner</h1>
+				<h1>Fire N’ Receive</h1>
 			</div>
 			<div className="header-right">
 				<div className="source-selector">
