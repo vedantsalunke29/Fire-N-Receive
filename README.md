@@ -42,7 +42,7 @@ Fire N' Receive is a high-performance SQL query execution and data visualization
 ## Performance Metrics
 
 ### Page Load Time
-- **Initial Load**: ~450ms
+- **Initial Load**: ~70ms
 - **Time to Interactive**: ~650ms
 - **First Contentful Paint**: ~320ms
 

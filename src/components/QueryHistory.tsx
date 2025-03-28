@@ -42,7 +42,6 @@ export const QueryHistory = ({ items, onSelect, icon }: QueryHistoryProps) => {
     return query.length > maxLength ? query.substring(0, maxLength) + "..." : query
   }
 
-  // Group items by date
   const groupedItems: Record<string, HistoryItem[]> = {}
   items.forEach((item) => {
     const dateKey = formatDate(item.timestamp)
