@@ -21,7 +21,6 @@ Fire N' Receive is a high-performance SQL query execution and data visualization
 
 ### Core Framework
 - **React 18** with TypeScript for type-safe component development
-- **Next.js App Router** for efficient routing and server components
 
 ### Major Packages
 - **Lucide React** for consistent, high-quality icons
@@ -42,24 +41,37 @@ Fire N' Receive is a high-performance SQL query execution and data visualization
 ## Performance Metrics
 
 ### Page Load Time
-- **Initial Load**: ~70ms
-- **Time to Interactive**: ~650ms
-- **First Contentful Paint**: ~320ms
+- **Initial Load**: ~52ms
+- **Time to Interactive**: ~70ms
+- **Last Contentful Paint (LCP)**: ~160ms
 
 ### Measurement Methodology
 Performance metrics were measured using:
-- Chrome DevTools Performance panel
-- Lighthouse audits
-- React Profiler
-- Custom performance markers using the Performance API:
+- **Chrome DevTools Performance panel**
+- **Lighthouse audits**
+- **React Profiler**
+- **Custom performance markers using the Performance API**:
 
 ```javascript
-// Example of performance measurement in the application
-const startTime = performance.now();
-// ... component rendering or data processing
-const endTime = performance.now();
-console.log(`Operation took ${endTime - startTime}ms`);
+import { useEffect } from "react";
+import { HomePage } from "./pages/HomePage";
+
+function App() {
+  useEffect(() => {
+    const start = performance.now();
+
+    requestAnimationFrame(() => {
+      const loadTime = performance.now() - start;
+      console.log(`Page loaded in ${loadTime.toFixed(2)} ms`);
+    });
+  }, []);
+
+  return <HomePage />;
+}
+
+export default App;
 ```
+## Performance Metrices on Chrome DevTools
 
 ## Performance Optimizations
 
@@ -70,7 +82,6 @@ console.log(`Operation took ${endTime - startTime}ms`);
 - **Virtualized Rendering**: Optimized table rendering that can handle millions of rows without lag
 - **Memory Management**: Doesn't store the entire dataset in memory, only the visible portion
 
-
 ### UI Optimizations
 
 - **Throttled UI Updates**: Prevents excessive re-renders during scrolling and data loading
@@ -78,13 +89,11 @@ console.log(`Operation took ${endTime - startTime}ms`);
 - **CSS Optimizations**: Uses efficient CSS selectors and avoids expensive properties
 - **Lazy Loading**: Components and features are loaded only when needed
 
-
 ### Query Execution
 
 - **Execution Time Tracking**: Measures and displays query execution time
 - **Optimized Query Parsing**: Efficient parsing of SQL for file-based queries
 - **Chunked Data Processing**: Processes large datasets in chunks to prevent UI freezing
-
 
 ## Key Differentiators
 
@@ -96,7 +105,6 @@ Fire N' Receive is specifically optimized to handle extremely large datasets (mi
 - **Optimized Rendering**: Only renders what's visible to the user
 - **Performance-First Design**: Every component is built with performance as the primary consideration
 
-
 ### No Local Storage Dependency
 
 Unlike many similar tools, Fire N' Receive doesn't rely on browser storage:
@@ -105,12 +113,11 @@ Unlike many similar tools, Fire N' Receive doesn't rely on browser storage:
 - **Session-Based Operation**: All operations happen within the current session
 - **Privacy-Focused**: No data persists after the browser is closed
 
-
 ## Getting Started
 
 ### Installation
 
-```shellscript
+```shell
 # Clone the repository
 git clone https://github.com/vedantsalunke29/Fire-N-Receive.git
 
@@ -131,3 +138,4 @@ npm run dev
 6. View results in the table below
 7. Use pagination controls to navigate through large result sets
 8. Export results as CSV or JSON if needed
+
