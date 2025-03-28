@@ -18,7 +18,7 @@ import { FileUploader } from "../components/FileUploader";
 import "../styles/HomePage.css";
 import { Header } from "../components/Header";
 
-// Types
+
 type QuerySource = "database" | "file";
 type QueryHistoryItem = {
 	query: string;
@@ -35,7 +35,7 @@ type DatabaseStructure = {
 };
 
 export const HomePage = () => {
-	// State
+
 	const [query, setQuery] = useState(predefinedQueries[0].query);
 	const [results, setResults] = useState<any[]>([]);
 	const [columns, setColumns] = useState<string[]>([]);
@@ -329,7 +329,6 @@ export const HomePage = () => {
 											className="query-dropdown"
 											onChange={(e) => handleQuerySelect(e.target.value)}
 										>
-											<option value="">-- Select query --</option>
 											{predefinedQueries.map(
 												(
 													item: { query: string; name: string },
@@ -372,6 +371,7 @@ export const HomePage = () => {
 											id="saved-queries"
 											className="query-dropdown"
 											onChange={(e) => handleQuerySelect(e.target.value)}
+											value={query}
 										>
 											<option value="">-- Select saved query --</option>
 											{savedQueries
