@@ -73,8 +73,10 @@ export default App;
 ```
 ## Performance Metrices on Chrome DevTools
 
-## Performance Optimizations
+<img width="1710" alt="Screenshot 2025-03-29 at 02 05 22" src="https://github.com/user-attachments/assets/cbc59eff-3882-4593-8431-00ba718be2c0" />
+<img width="1710" alt="Screenshot 2025-03-29 at 00 41 35" src="https://github.com/user-attachments/assets/ffd04402-291a-4980-9497-dd2d2912d957" />
 
+## Performance Optimizations
 ### Large Dataset Handling
 
 - **Efficient Pagination**: Only renders the current page of data, regardless of total dataset size
