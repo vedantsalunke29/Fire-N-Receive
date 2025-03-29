@@ -1,21 +1,42 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
+import compression from 'vite-plugin-compression'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Gzip compression
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240, // 10kb
+      deleteOriginFile: false,
+      verbose: true,
+    }),
+    // Brotli compression (typically better than gzip)
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240, // 10kb
+      deleteOriginFile: false,
+      verbose: true,
+    }),
+  ],
   build: {
-    minify: 'terser', 
+    minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, 
-        dead_code: true, 
-        unused: true, 
-        passes: 3, 
-      },
-      output: {
-        comments: false, 
-      },
+        drop_console: true,
+        drop_debugger: true
+      }
     },
-    sourcemap: false, 
-  },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'lucide': ['lucide-react']
+        }
+      }
+    }
+  }
 })
