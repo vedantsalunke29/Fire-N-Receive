@@ -112,45 +112,8 @@ export const HomePage = () => {
 				data = result.data;
 				cols = result.columns;
 			} else if (querySource === "file" && fileData) {
-
-				const lowerQuery = query.toLowerCase();
-				if (lowerQuery.includes("select") && lowerQuery.includes("from")) {
-					const selectPart = lowerQuery
-						.split("select")[1]
-						.split("from")[0]
-						.trim();
-					const selectedCols =
-						selectPart === "*"
-							? Object.keys(fileData[0])
-							: selectPart.split(",").map((col) => col.trim());
-
-					let filteredData = fileData;
-					if (lowerQuery.includes("where")) {
-						const wherePart = lowerQuery.split("where")[1].trim();
-						const [field, operator, value] = wherePart.split(/\s+/);
-
-						filteredData = fileData.filter((row) => {
-							if (operator === "=")
-								return row[field] == value.replace(/'/g, "");
-							if (operator === ">") return row[field] > value;
-							if (operator === "<") return row[field] < value;
-							return true;
-						});
-					}
-
-					data = filteredData.map((row) => {
-						const newRow: Record<string, any> = {};
-						selectedCols.forEach((col) => {
-							newRow[col] = row[col];
-						});
-						return newRow;
-					});
-
-					cols = selectedCols;
-				} else {
-					data = fileData;
-					cols = Object.keys(fileData[0]);
-				}
+				data = fileData;
+				cols = Object.keys(fileData[0]);
 			} else {
 				throw new Error("No data source available");
 			}

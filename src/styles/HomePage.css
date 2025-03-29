@@ -255,7 +255,6 @@ a {
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  overflow-y: auto;
 }
 
 .query-header {

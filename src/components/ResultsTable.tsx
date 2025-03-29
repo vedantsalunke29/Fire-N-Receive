@@ -45,6 +45,9 @@ export const ResultsTable = ({ data, columns, isLoading }: ResultsTableProps) =>
 
   const getCurrentPageData = useCallback(() => {
     const startIndex = (currentPage - 1) * pageSize
+    if (startIndex > data.length) {
+      return data
+    }
     return data.slice(startIndex, startIndex + pageSize)
   }, [data, currentPage, pageSize])
 
