@@ -4,8 +4,11 @@ import { useRef, useState } from "react"
 import { Upload, AlertCircle } from "lucide-react"
 import "../styles/FileUploader.css"
 
+interface DataRow {
+  [key: string]: any; 
+}
 interface FileUploaderProps {
-  onFileUpload: (data: any[]) => void
+  onFileUpload: (data: DataRow[]) => void
 }
 
 export const FileUploader: React.FC<FileUploaderProps> = ({ onFileUpload }) => {
@@ -19,7 +22,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ onFileUpload }) => {
     }
   }
 
-  const parseCSV = (text: string): any[] => {
+  const parseCSV = (text: string): DataRow[] => {
     const lines = text.split("\n")
     const headers = lines[0].split(",").map((h) => h.trim().replace(/^"|"$/g, ""))
 
@@ -67,40 +70,41 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ onFileUpload }) => {
 
     reader.onload = (event) => {
       try {
-        const content = event.target?.result as string
-        let data: any[] = []
-
+        const content = event.target?.result as string;
+        let data: DataRow[] = [];
+    
         if (file.name.endsWith(".json")) {
-          data = JSON.parse(content)
+          data = JSON.parse(content);
           if (!Array.isArray(data)) {
             if (typeof data === "object" && data !== null) {
-              const arrayProp = Object.keys(data).find((key) => Array.isArray(data[key]))
+              const arrayProp = Object.keys(data).find((key: string) => {
+                const value = (data as unknown as Record<string, unknown>)[key]; 
+                return Array.isArray(value);
+              });
               if (arrayProp) {
-                data = data[arrayProp]
+                data = (data as Record<string, DataRow[]>)[arrayProp];
               } else {
-                throw new Error("JSON file must contain an array of objects")
+                throw new Error("JSON file must contain an array of objects");
               }
             } else {
-              throw new Error("JSON file must contain an array of objects")
+              throw new Error("JSON file must contain an array of objects");
             }
           }
         } else if (file.name.endsWith(".csv")) {
-          data = parseCSV(content)
+          data = parseCSV(content);
         } else {
-          throw new Error("Unsupported file format. Please upload a JSON or CSV file.")
+          throw new Error("Unsupported file format. Please upload a JSON or CSV file.");
         }
-
+    
         if (data.length === 0) {
-          throw new Error("File contains no data")
+          throw new Error("File contains no data");
         }
-
-        onFileUpload(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Error parsing file")
-      } finally {
-        setLoading(false)
+    
+        onFileUpload(data);
+      } catch (error) {
+        console.error(error);
       }
-    }
+    };
 
     reader.onerror = () => {
       setError("Error reading file")

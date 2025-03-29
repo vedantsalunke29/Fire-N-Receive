@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import {
@@ -49,7 +48,7 @@ export const HomePage = () => {
 	const [querySource, setQuerySource] = useState<QuerySource>("database");
 	const [fileData, setFileData] = useState<any[] | null>(null);
 	const [selectedDatabase, setSelectedDatabase] = useState<string>("main_db");
-	const [databaseStructure, setDatabaseStructure] = useState<
+	const [databaseStructure] = useState<
 		DatabaseStructure[]
 	>([
 		{
