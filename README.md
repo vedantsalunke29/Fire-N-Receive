@@ -20,7 +20,13 @@ Fire N' Receive is a high-performance SQL query execution and data visualization
 ## Technology Stack
 
 ### Core Framework
-- **React 18** with TypeScript for type-safe component development
+- **React Vite** with TypeScript for type-safe component development and for faster bundling and loading
+
+### Why Vite with React
+- Faster build and hot module replacement (HMR) than traditional React setups.
+
+- Improves performance by reducing initial page load times.
+
 
 ### Major Packages
 - **Lucide React** for consistent, high-quality icons
@@ -41,7 +47,7 @@ Fire N' Receive is a high-performance SQL query execution and data visualization
 ## Performance Metrics
 
 ### Page Load Time
-- **Initial Load**: ~52ms
+- **Initial Load**: ~2ms - 52ms
 - **Time to Interactive**: ~70ms
 - **Last Contentful Paint (LCP)**: ~160ms
 
@@ -77,6 +83,21 @@ export default App;
 <img width="1710" alt="Screenshot 2025-03-29 at 00 41 35" src="https://github.com/user-attachments/assets/ffd04402-291a-4980-9497-dd2d2912d957" />
 
 ## Performance Optimizations
+
+### Optimizations Implemented
+- **gzip & Brotli Compression**: Used for minimizing file size and improving load times.
+
+- Reduces HTML, CSS, JavaScript, and API response payloads efficiently.
+
+### Minification and Bundling
+
+- **Terser Minification**: Used to reduce JavaScript file sizes.
+
+- **Tree Shaking**: Eliminates unused code for optimal performance.
+
+- **Rollup Manual Chunks**: Splits React and other dependencies into separate bundles to improve caching.
+
+
 ### Large Dataset Handling
 
 - **Efficient Pagination**: Only renders the current page of data, regardless of total dataset size
