@@ -390,7 +390,7 @@ a {
 @media (max-width: 767px) {
   .app-header {
     padding: 0 0.5rem;
-    margin: 1rem 0rem;
+
   }
 
   .app-header h1 {
