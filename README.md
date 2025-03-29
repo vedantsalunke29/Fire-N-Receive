@@ -78,7 +78,7 @@ function App() {
 export default App;
 ```
 ## Performance Metrices on Chrome DevTools
-
+<img width="1710" alt="Screenshot 2025-03-29 at 13 13 31" src="https://github.com/user-attachments/assets/927c3250-eeb5-43f9-9613-5912a6ef4258" />
 <img width="1710" alt="Screenshot 2025-03-29 at 02 05 22" src="https://github.com/user-attachments/assets/cbc59eff-3882-4593-8431-00ba718be2c0" />
 <img width="1710" alt="Screenshot 2025-03-29 at 00 41 35" src="https://github.com/user-attachments/assets/ffd04402-291a-4980-9497-dd2d2912d957" />
 
